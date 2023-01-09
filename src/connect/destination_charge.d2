@@ -1,0 +1,46 @@
+title: |md
+  # Destination Charge
+
+  This diagram shows the default behavior of a destination charge funds flow.
+
+  * The platform is typically the merchant of record unless, `on_behalf_of` is specified
+  * The statement descriptor will need to show a prefix such as `*SP` to indicate that the platform is helping to facilitate this payment. 
+
+  https://stripe.com/docs/connect/destination-charges
+|
+
+bank A: {
+  direction: right
+  platform_bank_account: {
+    shape: image
+    icon: https://emojicdn.elk.sh/🏦
+    width: 100
+  }
+}
+
+bank B: {
+  direction: right
+  connected account bank account: {
+    shape: image
+    icon: https://emojicdn.elk.sh/🏦
+    width: 100
+  }
+}
+
+customer: {
+  payment_method: {
+    shape: image
+    icon: https://emojicdn.elk.sh/💳
+    width: 100
+  }
+}
+
+stripe: {
+  direction: right
+  platform account -> connected account: \$100
+}
+
+customer.payment_method -> stripe.platform account: \$100
+
+stripe.platform account -> bank A.platform_bank_account
+stripe.connected account -> bank B.connected account bank account
