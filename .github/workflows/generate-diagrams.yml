@@ -1,0 +1,16 @@
+name: Generate D2 diagrams 
+run-name: ${{ github.actor }} is building D2 diagrams representing Stripe scenarios. 
+on: 
+  workflow_dispatch:
+  push:
+jobs:
+  build-d2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: List files in the repository
+        run: |
+          curl -fsSL https://d2lang.com/install.sh | sh -s --
+      - name: Generate D2 images
+        run: d2 --layout dagre src/**/*.d2
